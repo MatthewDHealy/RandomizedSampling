@@ -1,5 +1,10 @@
 #!/usr/bin/perl -w
 
+# Copyright 2019 by MD Healy
+# Licensed under GNU General Public License v3.0
+# see the License file
+# https://github.com/MatthewDHealy/RandomizedSampling
+
 # RandomSample.pl filename numchunks chunknum seedstring
 #
 # To sample with replacement, use different seed values
