@@ -1,5 +1,10 @@
 # RandomizedSampling
 
+## TO DO: make a Python version
+SHA-256 is available from the standard library of Python
+https://docs.python.org/3/library/hashlib.html
+so it should be a simple translation when I get around to it.
+
 Simple script that makes randomized samples from text files.  Comments in the code
 explain how to do sampling with or without replacement.  Sample can be whatever
 proportion of the text file you desire.
