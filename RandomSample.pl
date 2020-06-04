@@ -1,4 +1,11 @@
 #!/usr/bin/perl -w
+use strict;
+use Digest::SHA qw(sha256);
+use utf8;
+use open qw(:std :utf8);
+binmode STDOUT, ':utf8';
+binmode STDIN, ':utf8';
+use Encode;
 
 # Copyright 2019 by MD Healy
 # Licensed under GNU General Public License v3.0
@@ -21,8 +28,6 @@
 # that our sampling is statistically uncorrelated with anything
 # else
 
-use strict;
-use Digest::SHA qw(sha256);
 
 my ($infile, $modulus, $value, $seed) = @ARGV;
 
@@ -37,7 +42,8 @@ while(<$input>)
 {
     my $line = $_;
     $line =~ s/[\n\r]+//g;
-    my $hash = sha256($line .  $seed . $.);
+    # SHA croaks on wide characters, so we must use encode!
+    my $hash = sha256(Encode::encode_utf8($line .  $seed . $.));
     $hash = unpack("H*", $hash);
     my $digits = $hash;
    $digits =~ s/[^0-9]+//g;
@@ -49,4 +55,3 @@ while(<$input>)
     my $mod = $digits % $modulus;
     if (($.==1) or ($mod == $value)) {print "$line\n";}
 }
-
